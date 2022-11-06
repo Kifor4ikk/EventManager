@@ -21,10 +21,10 @@ public class EventMapperTest {
     private EventMapper eventMapper = new EventMapper();
     @BeforeTest
     public void setData(){
-        eventEntity = new EventEntity(1L,"Theme","Description","Manager",
+        eventEntity = new EventEntity("Theme","Description","Manager",
                 Time.valueOf("12:12:00"), Date.valueOf("2012-12-12"));
 
-        event = new Event(1L, "Theme","Description","Manager",
+        event = new Event( "Theme","Description","Manager",
                 LocalDateTime.of(LocalDate.of(2012,12,12), LocalTime.of(12,12,00)));
     }
 

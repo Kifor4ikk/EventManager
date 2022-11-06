@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Event {
 
-    private Long id;
     private String theme;
     private String description;
     private String manager;
@@ -19,22 +18,6 @@ public class Event {
         this.description = description;
         this.manager = manager;
         this.dateTime = dateTime;
-    }
-
-    public Event(Long id, String theme, String description, String manager, LocalDateTime dateTime) {
-        this.id = id;
-        this.theme = theme;
-        this.description = description;
-        this.manager = manager;
-        this.dateTime = dateTime;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTheme() {
@@ -74,8 +57,7 @@ public class Event {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return Objects.equals(id, event.id)
-                && Objects.equals(theme, event.theme)
+        return Objects.equals(theme, event.theme)
                 && Objects.equals(description, event.description)
                 && Objects.equals(manager, event.manager)
                 && Objects.equals(dateTime, event.dateTime);
@@ -83,14 +65,13 @@ public class Event {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, theme, description, manager, dateTime);
+        return Objects.hash(theme, description, manager, dateTime);
     }
 
     @Override
     public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", theme='" + theme + '\'' +
+        return "Event{"  +
+                " theme='" + theme + '\'' +
                 ", description='" + description + '\'' +
                 ", manager='" + manager + '\'' +
                 ", dateTime=" + dateTime +

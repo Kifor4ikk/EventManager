@@ -1,3 +1,7 @@
 
 server.port: 2001
 server.address: localhost
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

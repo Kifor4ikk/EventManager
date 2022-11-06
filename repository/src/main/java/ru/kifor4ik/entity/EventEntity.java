@@ -1,6 +1,7 @@
 package ru.kifor4ik.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
@@ -29,19 +30,17 @@ public class EventEntity implements Serializable {
     @NotNull(message = "Description should be not null")
     private String description;
 
-    @Size(min = 3, message = "Manager size min = 20")
+    @Size(min = 3, message = "Manager size min = 3")
     @Size(max = 70, message = "Manager size max = 70")
     @NotBlank(message = "Manager should be not blank!")
     @NotNull(message = "Manager should be not null")
     private String manager;
 
-    @NotNull
-    private Time startTime;
-
     @Future(message = "Event should be in future! Unless you have time machine...")
     @NotNull
     private Date startDate;
-
+    @NotNull
+    private Time startTime;
     @NotNull
     private Date creationDate;
     @NotNull
@@ -56,18 +55,18 @@ public class EventEntity implements Serializable {
         isDeleted = false;
     }
 
-    public EventEntity(Long id, String theme, String description, String manager, Time startTime, Date startDate) {
+    public EventEntity(String theme, String description, String manager, Time startTime,Date startDate) {
         this();
-        this.id = id;
         this.theme = theme;
         this.description = description;
         this.manager = manager;
-        this.startTime = startTime;
         this.startDate = startDate;
+        this.startTime = startTime;
     }
 
-    public Long getId() {
-        return id;
+    public EventEntity(Long id, String theme, String description, String manager, Time startTime, Date startDate) {
+        this(theme, description, manager,startTime,startDate);
+        this.id = id;
     }
 
     public void setId(Long id) {
@@ -114,6 +113,14 @@ public class EventEntity implements Serializable {
         this.startDate = startDate;
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public Date getCreationDate() {
         return creationDate;
     }
@@ -130,21 +137,12 @@ public class EventEntity implements Serializable {
         this.creationTime = creationTime;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventEntity that = (EventEntity) o;
-        return Objects.equals(id, that.id)
-                && Objects.equals(theme, that.theme)
+        return Objects.equals(theme, that.theme)
                 && Objects.equals(description, that.description)
                 && Objects.equals(manager, that.manager) && Objects.equals(startTime, that.startTime)
                 && Objects.equals(startDate, that.startDate);
@@ -152,7 +150,7 @@ public class EventEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, theme, description, manager, startTime, startDate);
+        return Objects.hash(theme, description, manager, startTime, startDate);
     }
 
     @Override
