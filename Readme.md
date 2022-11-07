@@ -32,6 +32,7 @@ EventEntity
 Opportunities
 ---
 * CRUD for Event
+* soft delete
 * getAll() function with pagination and filters.
 
  How to start?
