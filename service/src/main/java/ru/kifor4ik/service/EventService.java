@@ -71,6 +71,6 @@ public class EventService {
 
     //if not need any filter just put null instead of filter param
     public List<Event> getAllFiltered(int pageSize, int page, String theme, String manage, LocalDate date, LocalTime time) {
-        return eventMapper.fromListOfEntityToListOfModel(eventRepository.getByTest(pageSize, page, theme, manage, date, time));
+        return eventMapper.fromListOfEntityToListOfModel(eventRepository.getAll(pageSize, page, theme, manage, date, time));
     }
 }

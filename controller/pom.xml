@@ -13,12 +13,6 @@
     <dependencies>
         <dependency>
             <groupId>ru.kifor4ik</groupId>
-            <artifactId>repository</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>ru.kifor4ik</groupId>
             <artifactId>service</artifactId>
             <version>1.0</version>
             <scope>compile</scope>

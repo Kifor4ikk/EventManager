@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import jdk.jfr.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.kifor4ik.model.Event;
@@ -17,7 +18,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-
 
 @Validated
 @RestController
@@ -72,8 +72,11 @@ public class EventController {
         return eventService.delete(id);
     }
 
-    @GetMapping("/getAllFiltered")
-    public List<Event> getAllFiltered(int pageSize, int page, String theme, String manager, LocalDate date, LocalTime time) {
+    @GetMapping("/getAll")
+    public List<Event> getAllFiltered(
+            Integer pageSize, Integer page, String theme, String manager, LocalDate date, LocalTime time) {
+        if(page == null) page = 0;
+        if(pageSize == null) pageSize = 10;
         return eventService.getAllFiltered(pageSize, page, theme, manager, date, time);
     }
 }

@@ -3,10 +3,7 @@ package ru.kifor4ik.repository;
 import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import jakarta.validation.ConstraintViolationException;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
@@ -76,7 +73,7 @@ public class EventRepository implements CRUDrepository<EventEntity> {
         return false;
     }
 
-    public List<EventEntity> getByTest(int pageSize, int page, String theme, String manager, LocalDate date, LocalTime time) {
+    public List<EventEntity> getAll(int pageSize, int page, String theme, String manager, LocalDate date, LocalTime time) {
         try {
 
             session.beginTransaction();
@@ -95,7 +92,10 @@ public class EventRepository implements CRUDrepository<EventEntity> {
             if (time != null)
                 totalPredicate = criteriaBuilder.and(totalPredicate, criteriaBuilder.equal(root.get("startTime"), Time.valueOf(time)));
 
-            TypedQuery<EventEntity> typedQuery = session.createQuery(criteria.select(root).where(totalPredicate));
+            TypedQuery<EventEntity> typedQuery =
+                    session.createQuery(criteria.select(root)
+                            .where(totalPredicate)
+                            .orderBy(criteriaBuilder.asc(root.get("id"))));
 
             typedQuery.setFirstResult(page);
             if (pageSize == 0) pageSize = 10;

@@ -64,9 +64,8 @@ public class EventEntity implements Serializable {
         this.startTime = startTime;
     }
 
-    public EventEntity(Long id, String theme, String description, String manager, Time startTime, Date startDate) {
-        this(theme, description, manager, startTime, startDate);
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {

@@ -31,25 +31,23 @@ public class EventMapper {
 
     public Event fromEntityToModel(EventEntity eventEntity) {
         Event event = new Event();
-
+        event.setId(eventEntity.getId());
         event.setTheme(eventEntity.getTheme());
         event.setManager(eventEntity.getManager());
         event.setDescription(eventEntity.getDescription());
         event.setDateTime(LocalDateTime.of(eventEntity.getStartDate().toLocalDate(), eventEntity.getStartTime().toLocalTime()));
-
         return event;
     }
 
+    //Function for function which need ID for operation
     public EventEntity fromModelToEntityWithId(Event event, Long id) {
         EventEntity eventEntity = new EventEntity();
-
         eventEntity.setId(id);
         eventEntity.setTheme(event.getTheme());
         eventEntity.setManager(event.getManager());
         eventEntity.setDescription(event.getDescription());
         eventEntity.setStartDate(Date.valueOf(event.getDateTime().toLocalDate()));
         eventEntity.setStartTime(Time.valueOf(event.getDateTime().toLocalTime()));
-
         return eventEntity;
     }
 

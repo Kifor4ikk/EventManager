@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Event {
 
+    private Long id;
     private String theme;
     private String description;
     private String manager;
@@ -18,6 +19,14 @@ public class Event {
         this.description = description;
         this.manager = manager;
         this.dateTime = dateTime;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTheme() {
