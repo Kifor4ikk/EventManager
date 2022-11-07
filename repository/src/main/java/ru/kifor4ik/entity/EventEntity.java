@@ -55,7 +55,7 @@ public class EventEntity implements Serializable {
         isDeleted = false;
     }
 
-    public EventEntity(String theme, String description, String manager, Time startTime,Date startDate) {
+    public EventEntity(String theme, String description, String manager, Time startTime, Date startDate) {
         this();
         this.theme = theme;
         this.description = description;
@@ -65,7 +65,7 @@ public class EventEntity implements Serializable {
     }
 
     public EventEntity(Long id, String theme, String description, String manager, Time startTime, Date startDate) {
-        this(theme, description, manager,startTime,startDate);
+        this(theme, description, manager, startTime, startDate);
         this.id = id;
     }
 

@@ -14,7 +14,7 @@
         <property name="hibernate.connection.pool_size">4</property>
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create-only</property>
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
@@ -22,7 +22,7 @@
         <property name="hibernate.connection.characterEncoding">utf8</property>
         <property name="hibernate.connection.useUnicode">true</property>
         <!-- Mapping -->
-        <mapping class="ru.kifor4ik.entity.EventEntity" />
+        <mapping class="ru.kifor4ik.entity.EventEntity"/>
 
     </session-factory>
 </hibernate-configuration>

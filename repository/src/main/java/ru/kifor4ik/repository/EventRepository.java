@@ -41,7 +41,7 @@ public class EventRepository implements CRUDrepository<EventEntity> {
             session.merge(event);
             session.getTransaction().commit();
             return true;
-        } catch (ConstraintViolationException e){
+        } catch (ConstraintViolationException e) {
             throw e;
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -63,7 +63,6 @@ public class EventRepository implements CRUDrepository<EventEntity> {
     }
 
 
-
     @Override
     public boolean delete(EventEntity event) {
         try {
@@ -77,7 +76,7 @@ public class EventRepository implements CRUDrepository<EventEntity> {
         return false;
     }
 
-    public List<EventEntity> getByTest(int pageSize, int page, String theme, String manager, LocalDate date, LocalTime time){
+    public List<EventEntity> getByTest(int pageSize, int page, String theme, String manager, LocalDate date, LocalTime time) {
         try {
 
             session.beginTransaction();
@@ -87,26 +86,26 @@ public class EventRepository implements CRUDrepository<EventEntity> {
             Root<EventEntity> root = criteria.from(EventEntity.class);
 
             Predicate totalPredicate = criteriaBuilder.and(criteriaBuilder.equal(root.get("isDeleted"), false));
-            if(theme != null)
-                totalPredicate = criteriaBuilder.and(totalPredicate,criteriaBuilder.like(root.get("theme"), "%"+ theme +"%"));
-            if(manager != null)
-                totalPredicate = criteriaBuilder.and(totalPredicate,criteriaBuilder.like(root.get("manager"), "%"+ manager +"%"));
-            if(date != null)
-                totalPredicate = criteriaBuilder.and(totalPredicate,criteriaBuilder.equal(root.get("startDate"), Date.valueOf(date)));
-            if(time != null)
-                totalPredicate = criteriaBuilder.and(totalPredicate,criteriaBuilder.equal(root.get("startTime"), Time.valueOf(time)));
+            if (theme != null)
+                totalPredicate = criteriaBuilder.and(totalPredicate, criteriaBuilder.like(root.get("theme"), "%" + theme + "%"));
+            if (manager != null)
+                totalPredicate = criteriaBuilder.and(totalPredicate, criteriaBuilder.like(root.get("manager"), "%" + manager + "%"));
+            if (date != null)
+                totalPredicate = criteriaBuilder.and(totalPredicate, criteriaBuilder.equal(root.get("startDate"), Date.valueOf(date)));
+            if (time != null)
+                totalPredicate = criteriaBuilder.and(totalPredicate, criteriaBuilder.equal(root.get("startTime"), Time.valueOf(time)));
 
             TypedQuery<EventEntity> typedQuery = session.createQuery(criteria.select(root).where(totalPredicate));
 
             typedQuery.setFirstResult(page);
-            if(pageSize == 0) pageSize = 10;
+            if (pageSize == 0) pageSize = 10;
             typedQuery.setMaxResults(pageSize);
 
             List<EventEntity> temp = typedQuery.getResultList();
 
             session.getTransaction().commit();
             return temp;
-        } catch (Exception e){
+        } catch (Exception e) {
             session.getTransaction().rollback();
         }
         return null;

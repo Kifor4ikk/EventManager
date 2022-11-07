@@ -18,18 +18,18 @@ import java.util.stream.Collectors;
 public class EventMapper {
 
     public EventEntity fromModelToEntity(Event event) throws ConstraintViolationException {
-            EventEntity eventEntity = new EventEntity();
+        EventEntity eventEntity = new EventEntity();
 
-            eventEntity.setTheme(event.getTheme());
-            eventEntity.setManager(event.getManager());
-            eventEntity.setDescription(event.getDescription());
-            eventEntity.setStartDate(Date.valueOf(event.getDateTime().toLocalDate()));
-            eventEntity.setStartTime(Time.valueOf(event.getDateTime().toLocalTime()));
+        eventEntity.setTheme(event.getTheme());
+        eventEntity.setManager(event.getManager());
+        eventEntity.setDescription(event.getDescription());
+        eventEntity.setStartDate(Date.valueOf(event.getDateTime().toLocalDate()));
+        eventEntity.setStartTime(Time.valueOf(event.getDateTime().toLocalTime()));
 
-            return eventEntity;
+        return eventEntity;
     }
 
-    public Event fromEntityToModel(EventEntity eventEntity){
+    public Event fromEntityToModel(EventEntity eventEntity) {
         Event event = new Event();
 
         event.setTheme(eventEntity.getTheme());
@@ -40,7 +40,7 @@ public class EventMapper {
         return event;
     }
 
-    public EventEntity fromModelToEntityWithId(Event event, Long id){
+    public EventEntity fromModelToEntityWithId(Event event, Long id) {
         EventEntity eventEntity = new EventEntity();
 
         eventEntity.setId(id);
@@ -53,8 +53,8 @@ public class EventMapper {
         return eventEntity;
     }
 
-    public List<Event> fromListOfEntityToListOfModel(List<EventEntity> list){
-        if(list == null) return new ArrayList<>();
+    public List<Event> fromListOfEntityToListOfModel(List<EventEntity> list) {
+        if (list == null) return new ArrayList<>();
         return list.stream().map(this::fromEntityToModel).collect(Collectors.toList());
     }
 }

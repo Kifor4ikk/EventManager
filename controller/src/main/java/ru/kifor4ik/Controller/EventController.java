@@ -32,19 +32,19 @@ public class EventController {
     }
 
     @PostMapping
-    public boolean create (
+    public boolean create(
             @RequestParam String theme,
             @RequestParam String description,
             @RequestParam String manager,
             @RequestParam Date date,
             @RequestParam @Pattern(regexp = "[01][0-9]:[0-5][0-9]:[0-5][0-9]", message = "Bad time pattern") String time
     ) {
-        return eventService.create(new Event(theme,description,manager,
-                LocalDateTime.of(date.toLocalDate(),Time.valueOf(time).toLocalTime())));
+        return eventService.create(new Event(theme, description, manager,
+                LocalDateTime.of(date.toLocalDate(), Time.valueOf(time).toLocalTime())));
     }
 
     @GetMapping("/byId")
-    public Event get(Long id){
+    public Event get(Long id) {
         return eventService.getById(id);
     }
 
@@ -57,23 +57,23 @@ public class EventController {
             @RequestParam Date date,
             @RequestParam
             @Pattern(regexp = "[01][0-9]:[0-5][0-9]:[0-5][0-9]", message = "Bad time pattern") String time
-    ){
-        return eventService.update(id,new Event(theme,description,manager,
-                LocalDateTime.of(date.toLocalDate(),Time.valueOf(time).toLocalTime())));
+    ) {
+        return eventService.update(id, new Event(theme, description, manager,
+                LocalDateTime.of(date.toLocalDate(), Time.valueOf(time).toLocalTime())));
     }
 
     @PutMapping("/softDelete")
-    public boolean softDelete(Long id){
+    public boolean softDelete(Long id) {
         return eventService.softDelete(id);
     }
 
     @DeleteMapping
-    public boolean delete(Long id){
+    public boolean delete(Long id) {
         return eventService.delete(id);
     }
 
     @GetMapping("/getAllFiltered")
-    public List<Event> getAllFiltered(int pageSize, int page, String theme, String manager, LocalDate date, LocalTime time){
-        return eventService.getAllFiltered(pageSize,page,theme,manager,date,time);
+    public List<Event> getAllFiltered(int pageSize, int page, String theme, String manager, LocalDate date, LocalTime time) {
+        return eventService.getAllFiltered(pageSize, page, theme, manager, date, time);
     }
 }

@@ -70,7 +70,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{"  +
+        return "Event{" +
                 " theme='" + theme + '\'' +
                 ", description='" + description + '\'' +
                 ", manager='" + manager + '\'' +

@@ -3,6 +3,7 @@ package ru.kifor4ik.exception;
 public class ExceptionDto {
     private int code;
     private String message;
+
     public ExceptionDto() {
     }
 
