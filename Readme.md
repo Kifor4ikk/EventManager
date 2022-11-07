@@ -36,7 +36,7 @@ Opportunities
 
  How to start?
 ---
-+ Step 1. Download archive Start.rar
++ Step 1. Download archive Start.rar (https://disk.yandex.ru/d/fLLyeK-vjnZbGw) too large for git
 + Step 2. Unzip in any folder(Not bucket).
 + Step 3. Change server address and port in application.yml file.
 + Step 4. Change database properties in hibernate.cfg.xml file.
