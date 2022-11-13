@@ -1,14 +1,10 @@
-package ru.kifor4ik.Controller;
+package ru.kifor4ik.controller;
 
-import io.swagger.annotations.ApiModelProperty;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import jdk.jfr.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.kifor4ik.dao.EventDao;
 import ru.kifor4ik.model.Event;
 import ru.kifor4ik.service.EventService;
 
@@ -44,39 +40,27 @@ public class EventController {
     }
 
     @GetMapping("/byId")
-    public Event get(Long id) {
+    public Event get(@RequestParam Long id) {
         return eventService.getById(id);
     }
 
     @PutMapping
-    public boolean update(
-            @RequestParam Long id,
-            @RequestParam String theme,
-            @RequestParam String description,
-            @RequestParam String manager,
-            @RequestParam Date date,
-            @RequestParam
-            @Pattern(regexp = "[01][0-9]:[0-5][0-9]:[0-5][0-9]", message = "Bad time pattern") String time
-    ) {
-        return eventService.update(id, new Event(theme, description, manager,
-                LocalDateTime.of(date.toLocalDate(), Time.valueOf(time).toLocalTime())));
+    public boolean update(@RequestBody EventDao eventDao) {return eventService.update(eventDao);
     }
 
     @PutMapping("/softDelete")
-    public boolean softDelete(Long id) {
+    public boolean softDelete(@RequestParam Long id) {
         return eventService.softDelete(id);
     }
 
     @DeleteMapping
-    public boolean delete(Long id) {
+    public boolean delete(@RequestParam Long id) {
         return eventService.delete(id);
     }
 
     @GetMapping("/getAll")
     public List<Event> getAllFiltered(
             Integer pageSize, Integer page, String theme, String manager, LocalDate date, LocalTime time) {
-        if(page == null) page = 0;
-        if(pageSize == null) pageSize = 10;
         return eventService.getAllFiltered(pageSize, page, theme, manager, date, time);
     }
 }

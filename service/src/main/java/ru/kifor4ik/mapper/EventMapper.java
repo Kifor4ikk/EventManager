@@ -4,6 +4,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
+import ru.kifor4ik.dao.EventDao;
 import ru.kifor4ik.entity.EventEntity;
 import ru.kifor4ik.model.Event;
 
@@ -48,6 +49,17 @@ public class EventMapper {
         eventEntity.setDescription(event.getDescription());
         eventEntity.setStartDate(Date.valueOf(event.getDateTime().toLocalDate()));
         eventEntity.setStartTime(Time.valueOf(event.getDateTime().toLocalTime()));
+        return eventEntity;
+    }
+
+    public EventEntity fromDaoToEntityWithId(EventDao event) {
+        EventEntity eventEntity = new EventEntity();
+        eventEntity.setId(event.getId());
+        eventEntity.setTheme(event.getTheme());
+        eventEntity.setManager(event.getManager());
+        eventEntity.setDescription(event.getDescription());
+        eventEntity.setStartDate(Date.valueOf(event.getDate().toLocalDate()));
+        eventEntity.setStartTime(Time.valueOf(event.getTime()));
         return eventEntity;
     }
 

@@ -3,6 +3,7 @@ package ru.kifor4ik.entity;
 import jakarta.persistence.*;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -10,6 +11,10 @@ import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "event_")
 public class EventEntity implements Serializable {
@@ -64,106 +69,4 @@ public class EventEntity implements Serializable {
         this.startTime = startTime;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getManager() {
-        return manager;
-    }
-
-    public void setManager(String manager) {
-        this.manager = manager;
-    }
-
-    public Time getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Time startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Time getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(Time creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EventEntity that = (EventEntity) o;
-        return Objects.equals(theme, that.theme)
-                && Objects.equals(description, that.description)
-                && Objects.equals(manager, that.manager) && Objects.equals(startTime, that.startTime)
-                && Objects.equals(startDate, that.startDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(theme, description, manager, startTime, startDate);
-    }
-
-    @Override
-    public String toString() {
-        return "EventEntity{" +
-                "id=" + id +
-                ", theme='" + theme + '\'' +
-                ", description='" + description + '\'' +
-                ", manager='" + manager + '\'' +
-                ", startTime=" + startTime +
-                ", startDate=" + startDate +
-                ", creationDate=" + creationDate +
-                ", creationTime=" + creationTime +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

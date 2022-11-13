@@ -3,6 +3,7 @@ package ru.kifor4ik.service;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kifor4ik.dao.EventDao;
 import ru.kifor4ik.entity.EventEntity;
 import ru.kifor4ik.exception.NotFoundException;
 import ru.kifor4ik.mapper.EventMapper;
@@ -46,10 +47,10 @@ public class EventService {
         return eventEntity;
     }
 
-    public boolean update(Long id, Event event) {
+    public boolean update(EventDao event) {
         //Function call to check exist and save creation time
-        EventEntity temp = getEntityById(id);
-        EventEntity update = eventMapper.fromModelToEntityWithId(event, id);
+        EventEntity temp = getEntityById(event.getId());
+        EventEntity update = eventMapper.fromDaoToEntityWithId(event);
 
         update.setCreationDate(temp.getCreationDate());
         update.setCreationTime(temp.getCreationTime());
@@ -70,7 +71,9 @@ public class EventService {
     }
 
     //if not need any filter just put null instead of filter param
-    public List<Event> getAllFiltered(int pageSize, int page, String theme, String manage, LocalDate date, LocalTime time) {
+    public List<Event> getAllFiltered(Integer pageSize, Integer page, String theme, String manage, LocalDate date, LocalTime time) {
+        if(page == null) page = 0;
+        if(pageSize == null) pageSize = 10;
         return eventMapper.fromListOfEntityToListOfModel(eventRepository.getAll(pageSize, page, theme, manage, date, time));
     }
 }

@@ -1,4 +1,4 @@
-package ru.kifor4ik.Controller;
+package ru.kifor4ik.controller;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -27,4 +27,11 @@ public class ExceptionController {
     public ExceptionDto notFound(NotFoundException exception, WebRequest request) {
         return new ExceptionDto(HttpStatus.NOT_FOUND.value(), exception.getLocalizedMessage());
     }
+
+    @ExceptionHandler({NumberFormatException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ExceptionDto badRequest(NumberFormatException exception, WebRequest request) {
+        return new ExceptionDto(HttpStatus.BAD_REQUEST.value(), exception.getLocalizedMessage());
+    }
+
 }
