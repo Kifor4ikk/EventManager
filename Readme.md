@@ -29,6 +29,14 @@ EventEntity
 * Time creationTime - Time creation of this note. (Auto setter)
 * boolean isDeleted - For soft delete. If entity marked as deleted you can do nothing with it
 
+Dao describe
+---
+* String Theme - in other words name of event. Size: 3 - 70 symbols.
+* String describe - Size: 30 - 10000 symbols.
+* String manager - Main initiator of event. Size: 3 - 70 symbols.
+* Date date - Date of event. Can be only in future. 
+* String time - Time of event. "HH:MM:SS" - will be converted to time
+
 Opportunities
 ---
 * CRUD for Event
